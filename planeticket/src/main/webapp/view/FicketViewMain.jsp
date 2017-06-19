@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/jquery-easyui-1.5.2/themes/default/easyui.css">
 <script type="text/javascript">
-	/* function openTbs(title,url){
+	 function openTbs(title,url){
 		if($("#tabs").tabs("exists",title)){
 			$("#tabs").tabs("select",title);
 		}else{
@@ -22,11 +22,11 @@
 			});
 			
 		}
-	} */
+	} 
 </script>
 </head>
 <body>
-<!-- <div class="easyui-layout" style="width:100%;height:768px">
+ <div class="easyui-layout" style="width:100%;height:768px">
 		<div region="north" split="true" style="height: 100px;width: 100%">
 			北航
 		</div>
@@ -42,6 +42,6 @@
 			<div class="easyui-tabs" id="tabs" style="height:100%">
 			</div>
 		</div>
-	</div> -->
+	</div>
 </body>
 </html>
