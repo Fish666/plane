@@ -18,6 +18,7 @@ import com.chinasoft.planeticket.service.IFicketService;
 
 import net.sf.json.JSONObject;
 
+
 @Controller
 @RequestMapping("/view")
 public class FicketController {

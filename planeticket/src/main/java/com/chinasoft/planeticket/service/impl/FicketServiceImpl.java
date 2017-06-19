@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-
 import com.chinasoft.planeticket.mapper.FicketMapper;
 import com.chinasoft.planeticket.pojo.Ficket;
 import com.chinasoft.planeticket.service.IFicketService;

@@ -111,7 +111,6 @@ $(function(){
         						alert(data.tip);
         						$("#table").datagrid("reload");
         					}
-        							
         				})
                       }
             });
