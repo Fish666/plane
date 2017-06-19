@@ -5,23 +5,27 @@ import java.util.List;
 import com.chinasoft.planeticket.pojo.Ficket;
 
 public interface FicketMapper {
+	Ficket queryFicket(Ficket ficket);
 	/**
 	 * 添加
 	 * @param ficket
 	 * @return
 	 */
-	public boolean insertFicket(Ficket ficket); 
+	boolean insertFicket(Ficket ficket); 
+	/**
+	 * 修改
+	 * @param ficket
+	 * @return
+	 */
+	boolean updateFicket(Ficket ficket);
 	/**
 	 * 删除
 	 * @param ficket
 	 * @return
 	 */
-	Ficket deleteFicket(Ficket ficket);
-	/**
-	 * 查询
-	 * @param ficket
-	 * @return
-	 */
-	public List<Ficket> findAllFicket();
-	public List<Ficket> selectFicket(String ficket); 
-}	
+	boolean deleteFicket(String ids);
+	
+	String total(Ficket ficket);
+	
+	List<Ficket> findAll(Ficket ficket);
+}
