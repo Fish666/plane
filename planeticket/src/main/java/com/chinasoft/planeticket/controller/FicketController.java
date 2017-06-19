@@ -1,6 +1,5 @@
 package com.chinasoft.planeticket.controller;
 
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -12,6 +11,7 @@ import com.chinasoft.planeticket.pojo.Ficket;
 import com.chinasoft.planeticket.service.IFicketService;
 
 import net.sf.json.JSONObject;
+
 
 @Controller
 @RequestMapping("/ficket")
