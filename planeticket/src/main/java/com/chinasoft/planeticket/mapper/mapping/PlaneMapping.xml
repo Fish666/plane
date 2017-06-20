@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.chinasoft.planeticket.mapper.PlaneMapper">
+  		<resultMap id="planeResults" type="plane" >
+  			<id column="fid" property="fid"/>
+  			<result column="fplanenum" property="fplanenum"/>
+  			<result column="tstartplace" property="tstartplace"/>
+  			<result column="fprice" property="fprice"/>
+  			<result column="fstartplace" property="fstartplace"/>
+  			<result  column="fendplace" property="fendplace"/>
+  			<result column="fenddate" property="fenddate"/>
+  			<result column="fcompany" property="fcompany"/>
+  			<result column="fsitcount" property="fsitcount"/>
+  		</resultMap>
+  		
+  		<!-- 查询 --> 
+  		<!-- 	<select id="queryFicket" parameterType="ficket" resultMap="ficketResults">
+  				select * from ticket where 
+  				tname=#{tname} 
+  			</select> -->
+  		<!-- 添加 -->
+  		<insert id="insertPlane" parameterType="plane" useGeneratedKeys="true" keyProperty="uid" >
+  			insert into flight (fplanenum,fstartdate,fprice,fstartplace,fendplace,fenddate,fcompany,fsitcount) 
+  			values (#{fplanenum},#{fstartdate},#{fprice},#{fstartplace},#{fendplace},#{fenddate},#{fcompany},#{fsitcount})
+  		</insert>
+  	
+  			
+  </mapper>
