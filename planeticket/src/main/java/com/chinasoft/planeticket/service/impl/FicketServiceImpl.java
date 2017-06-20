@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.chinasoft.planeticket.mapper.FicketMapper;
 import com.chinasoft.planeticket.pojo.Ficket;
+import com.chinasoft.planeticket.pojo.Page;
 import com.chinasoft.planeticket.service.IFicketService;
 @Service("ficketService")
 public class FicketServiceImpl implements IFicketService{
@@ -64,6 +65,14 @@ public class FicketServiceImpl implements IFicketService{
 	public Ficket findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void queryUsers(Page<Ficket> page) {
+		// TODO Auto-generated method stub
+		List<Ficket> list=ficketMapper.queryUsers(page);
+		int total=ficketMapper.queryCount(page);
+		page.setRows(list);
+		page.setTotal(total);	
 	}
 	
 
