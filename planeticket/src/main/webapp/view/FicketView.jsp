@@ -172,7 +172,45 @@ $(function(){
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 	<!-- 搜索框 -->
+=======
+<h2>Basic Layout</h2>
+	<p>The layout contains north,south,west,east and center regions.</p>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-layout" style="width:700px;height:350px;">
+		<div data-options="region:'north'" style="height:50px"></div>
+		<div data-options="region:'south',split:true" style="height:50px;"></div>
+		<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+		<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+			<table class="easyui-datagrid"
+					data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+				<thead>
+					<tr>
+						<th data-options="field:'itemid'" width="80">Item ID</th>
+						<th data-options="field:'productid'" width="100">Product ID</th>
+						<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+						<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+						<th data-options="field:'attr1'" width="150">Attribute</th>
+						<th data-options="field:'status',align:'center'" width="60">Status</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	<form action="${pageContext.request.contextPath}/ficket/insertFicket.do">
+		出发地：<input name="tstartplace"><br>
+		目的地：<input name="tendplace"><br>
+		舱位：<input name="tcabin"><br>
+		日期：<input name="tdate"><br>
+		座位：<input name="tsit"><br>
+		儿童：<input name="tchidren"><br>
+		幼儿：<input name="baby"><br>
+		姓名：<input name="tname"><br>
+		价钱：<input name="tprice"><br>
+		<button>提交</button>
+>>>>>>> branch 'master' of https://github.com/Fish666/plane.git
 	<form id="queryForm">
 		<label>用户名：</label><input class="easyui-textbox" name="tname" id="qusetname">
 		<label>出发地：</label><input class="easyui-textbox" name="tstartplace" id="qrealname">
@@ -259,9 +297,6 @@ $(function(){
 					iconCls="icon-cancel" onclick="closeDlg();" style="width:100px;height:30px">取消</a>
 			</div>
 		</form>
-		
 	</div>
-	
-	
 </body>
 </html>
