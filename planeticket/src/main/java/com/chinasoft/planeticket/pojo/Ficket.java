@@ -30,11 +30,11 @@ public class Ficket {
 	/**
 	 * 儿童
 	 */
-	private String tchidren;
+	private String tchildren;
 	/**
 	 * 婴儿
 	 */
-	private String baby;
+	private String tbaby;
 	/**
 	 * 价格
 	 */
@@ -43,6 +43,7 @@ public class Ficket {
 	 * 乘客姓名
 	 */
 	private String tname;
+	
 	public int getTid() {
 		return tid;
 	}
@@ -79,17 +80,17 @@ public class Ficket {
 	public void setTsit(String tsit) {
 		this.tsit = tsit;
 	}
-	public String getTchidren() {
-		return tchidren;
+	public String getTchildren() {
+		return tchildren;
 	}
-	public void setTchidren(String tchidren) {
-		this.tchidren = tchidren;
+	public void setTchildren(String tchildren) {
+		this.tchildren = tchildren;
 	}
-	public String getBaby() {
-		return baby;
+	public String getTbaby() {
+		return tbaby;
 	}
-	public void setBaby(String baby) {
-		this.baby = baby;
+	public void setTbaby(String tbaby) {
+		this.tbaby = tbaby;
 	}
 	public String getTprice() {
 		return tprice;
@@ -106,10 +107,10 @@ public class Ficket {
 	@Override
 	public String toString() {
 		return "Ficket [tid=" + tid + ", tstartplace=" + tstartplace + ", tendplace=" + tendplace + ", tcabin=" + tcabin
-				+ ", tdate=" + tdate + ", tsit=" + tsit + ", tchidren=" + tchidren + ", baby=" + baby + ", tprice="
+				+ ", tdate=" + tdate + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby=" + tbaby + ", tprice="
 				+ tprice + ", tname=" + tname + "]";
 	}
-
+	
 	
 	
 }
