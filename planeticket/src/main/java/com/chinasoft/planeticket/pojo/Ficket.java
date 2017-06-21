@@ -1,6 +1,6 @@
 package com.chinasoft.planeticket.pojo;
 
-import java.sql.Date;
+import java.sql.Time;
 
 public class Ficket {
 	/**
@@ -22,7 +22,11 @@ public class Ficket {
 	/**
 	 * 日期
 	 */
-	private Date tdate;
+	private String tdate;
+	/**
+	 * 时间
+	 */
+	private Time times;
 	/**
 	 * 座位
 	 */
@@ -43,7 +47,6 @@ public class Ficket {
 	 * 乘客姓名
 	 */
 	private String tname;
-	
 	public int getTid() {
 		return tid;
 	}
@@ -68,11 +71,17 @@ public class Ficket {
 	public void setTcabin(String tcabin) {
 		this.tcabin = tcabin;
 	}
-	public Date getTdate() {
+	public String getTdate() {
 		return tdate;
 	}
-	public void setTdate(Date tdate) {
+	public void setTdate(String tdate) {
 		this.tdate = tdate;
+	}
+	public Time getTimes() {
+		return times;
+	}
+	public void setTimes(Time time) {
+		this.times = time;
 	}
 	public String getTsit() {
 		return tsit;
@@ -107,8 +116,8 @@ public class Ficket {
 	@Override
 	public String toString() {
 		return "Ficket [tid=" + tid + ", tstartplace=" + tstartplace + ", tendplace=" + tendplace + ", tcabin=" + tcabin
-				+ ", tdate=" + tdate + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby=" + tbaby + ", tprice="
-				+ tprice + ", tname=" + tname + "]";
+				+ ", tdate=" + tdate + ", time=" + times + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby="
+				+ tbaby + ", tprice=" + tprice + ", tname=" + tname + "]";
 	}
 	
 	

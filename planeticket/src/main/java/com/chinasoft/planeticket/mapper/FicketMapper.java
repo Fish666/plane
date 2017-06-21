@@ -3,6 +3,7 @@ package com.chinasoft.planeticket.mapper;
 import java.util.List;
 
 import com.chinasoft.planeticket.pojo.Ficket;
+import com.chinasoft.planeticket.pojo.Page;
 
 public interface FicketMapper {
 	Ficket queryFicket(Ficket ficket);
@@ -28,4 +29,6 @@ public interface FicketMapper {
 	String total(Ficket ficket);
 	
 	List<Ficket> findAll(Ficket ficket);
+	List<Ficket> queryUsers(Page<Ficket> page);
+	int queryCount(Page<Ficket> page);
 }

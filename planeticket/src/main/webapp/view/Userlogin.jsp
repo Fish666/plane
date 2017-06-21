@@ -13,8 +13,8 @@
 <script type="text/javascript" src="<%=basePath%>jquery-easyui-1.5.2/plugins/jquery.validatebox.js"></script>
 <script type="text/javascript" src="<%=basePath%>jquery-easyui-1.5.2/plugins/jquery.pagination.js"></script>
 <script type="text/javascript" src="<%=basePath%>jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
-<link rel="stylesheet" href="<%=basePath%>jquery-easyui-1.5.2/themes/default/easyui.css">
-<link  rel="stylesheet" href="<%=basePath%>jquery-easyui-1.5.2/themes/icon.css">
+<link 	rel="stylesheet" href="<%=basePath%>jquery-easyui-1.5.2/themes/default/easyui.css">
+<link  	rel="stylesheet" href="<%=basePath%>jquery-easyui-1.5.2/themes/icon.css">
 </head>
 <script type="text/javascript">
 $(function(){

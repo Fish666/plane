@@ -24,7 +24,6 @@ import net.sf.json.JSONObject;
 public class FicketController {
 	@Resource
 	private IFicketService iFicketService;
-	
 	/**
 	 * 首页
 	 * @param session
@@ -44,9 +43,7 @@ public class FicketController {
 		model.addAttribute("ficket",iFicketService.findById(id));
 		return null;
 		
-	}
-	
-	
+	}	
 	
 	
 	/**
@@ -75,7 +72,7 @@ public class FicketController {
 	 * @param ficket
 	 * @return
 	 */
-	/*@RequestMapping("/insertTesr")
+	/*@RequestMapping("/insertFicket")
 	@ResponseBody
 	public boolean insertTest(Ficket ficket){
 	boolean add=iFicketService.insertFicket(ficket);
@@ -123,18 +120,23 @@ public class FicketController {
 	 */
 	@RequestMapping("/updateFicket")
 	@ResponseBody
+	/*public void updateFicket(HttpServletRequest request,Ficket ficket){
+			iFicketService.updateFicket(ficket);
+		
+	}*/
+
+
 	public JSONObject updateFicket(Ficket ficket){
 		JSONObject json=new JSONObject();
 		System.out.println(ficket);
 		if (iFicketService.updateFicket(ficket)) {
 			json.put("status", 1);
-			json.put("tip", "修改成功");
+			json.put("tip", "修改失败");
 		}else {
 			json.put("status", 0);
-			json.put("tip", "修改失败");
+			json.put("tip", "修改成功");
 		}
 		return json;
 		
 	}
-	
 }
