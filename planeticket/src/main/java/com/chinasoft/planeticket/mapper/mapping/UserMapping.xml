@@ -22,4 +22,23 @@
   			insert into users(uname,upwd,urealname,usex,uage,ubirthday,uidnum,uemail,uphone,money_mid)values 
   			(#{uname},#{upwd},#{urealname},#{usex},#{uage},#{ubirthday},#{uidnum},#{uemail},#{uphone},#{money_mid})
   		</insert>
+  		
+  		<delete id="deleteUser" parameterType="java.lang.String">
+  			delete from users where uid in(#{_parameter});
+  		</delete>
+  		
+  		<select id="findAll" parameterType="user" resultMap="userResults">
+  			select * from users;
+  		</select>
+  		
+  		<select id="queryUser" parameterType="user" resultMap="userResults">
+  			select * from users where uname=#{uname},upwd=#{upwd},urealname=#{urealname},usex=#{usex},
+  			uage=#{uage},ubirthday=#{ubirthday},udinum=#{uidnum},uemail=#{uemail},uphone=#{uphone},money_id=#{money_id};
+  		</select>
+  		
+  		<update id="updateUser" parameterType="user">
+  			update users set uname=#{uname},upwd=#{upwd},urealname=#{urealname},usex=#{usex},
+  			uage=#{uage},ubirthday=#{ubirthday},udinum=#{uidnum},uemail=#{uemail},uphone=#{uphone},money_id=#{money_id}
+  			where uid=#{uid};
+  		</update>
   	</mapper>
