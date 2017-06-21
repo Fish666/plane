@@ -10,7 +10,7 @@
   			<result column="tendplace" property="tendplace"/>
   			<result column="tcabin" property="tcabin"/>
   			<result column="tdate" property="tdate"/>
-  			<result column="times" property="times"/>
+  			
   			<result column="tsit" property="tsit"/>
   			<result column="tchildren" property="tchildren"/>
   			<result column="tbaby" property="tbaby"/>
@@ -22,7 +22,7 @@
   		 <select id="queryFicket" parameterType="ficket" resultMap="ficketResults">
   			select * from ticket
   			where tstartplace=#{tstartplace} and tendplace=#{tendplace} and tcabin=#{tcabin} and tdate=#{tdate} and
-  			times=#{times} and tsit=#{tsit} and tchildren=#{tchildren} and tbaby=#{tbaby} and tprice=#{tprice} and tname=#{tname} 
+  			  tsit=#{tsit} and tchildren=#{tchildren} and tbaby=#{tbaby} and tprice=#{tprice} and tname=#{tname} 
   		</select> 
   		
   		<select id="findFicket" parameterType="java.lang.String" resultMap="ficketResults">
@@ -41,9 +41,6 @@
   				<if test="tendplace !=null and tendplace !=''">
   					and tendplace like concat('%','${tendplace}','%')
   				</if>
-  				<if test="tdate !=null and tdate !=''">
-  					and tdate like concat('%','${tdate}','%')
-  				</if>
   			</where>
   		</select>
   		 <select id="total" parameterType="ficket" resultType="java.lang.String">
@@ -58,26 +55,27 @@
   				<if test="tendplace !=null and tendplace !=''">
   					tendplace=#{tendplace}
   				</if>
-  				<if test="tdate !=null and tdate !=''">
-  					tdate=#{tdate}
-  				</if>
   			</where>
   		</select>
   		
   		<!-- 添加 -->
   		<insert id="insertFicket" parameterType="ficket" useGeneratedKeys="true" keyProperty="uid" >
-  			insert into ticket (tstartplace,tendplace,tcabin,tdate,times,tsit,tchildren,tbaby,tprice,tname) 
-  			values (#{tstartplace},#{tendplace},#{tcabin},#{tdate},#{times},#{tsit},#{tchildren},#{tbaby},#{tprice},#{tname})
+  			insert into ticket (tstartplace,tendplace,tcabin,tdate,tsit,tchildren,tbaby,tprice,tname) 
+  			values (#{tstartplace},#{tendplace},#{tcabin},#{tdate},#{tsit},#{tchildren},#{tbaby},#{tprice},#{tname})
   		</insert>
   		
   		<!-- 修改 -->
   		<update id="updateFicket" parameterType="ficket" useGeneratedKeys="true" keyProperty="uid">
   			update ticket set tstartplace=#{tstartplace},tendplace=#{tendplace},tcabin=#{tcabin},tdate=#{tdate},
-  			times=#{times},tsit=#{tsit},tchildren=#{tchildren},tbaby=#{tbaby},tprice=#{tprice},tname=#{tname} where tid=#{tid}
+  			tsit=#{tsit},tchildren=#{tchildren},tbaby=#{tbaby},tprice=#{tprice},tname=#{tname} where tid=#{tid}
   		</update>
   		
   		<!-- 删除 -->
   		<delete id="deleteFicket" parameterType="java.lang.String">
-  			delete from ticket where tid in(#{_parameter})
+  			delete from ticket where tid in
+  			<foreach collection="array" open="(" close=")" separator="," item="tid">
+ 			#{tid}
+ 		</foreach>
+  			
   		</delete>
   </mapper>

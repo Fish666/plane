@@ -32,7 +32,7 @@ $(function(){
 					 tname:$("#qusetname").val(),
 					 tstartplace:$("#qusetstartplace").val(),
 					 tendplace:$("#end").val(),
-					 startDate:$("#start").val(),
+//					 startDate:$("#start").val(),
 					 
 			}
 			//发送ajax请求
@@ -70,11 +70,14 @@ $(function(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("open").dialog("setTitle","添加机票");
 		$("#saveUrl").val("<%=basePath%>view/insertFicket.do");
-		$("#uutstartplace").textbox({
+		$("#uutname").textbox({
 			readonly:false,
 		});
-		
+		$("#uusers_uId").textbox({
+			required:false
+		})
 	});
+		
    $("#query").click(function(){
 		var data={
 			 curPage:$("#table").datagrid("getPager").pagination("options").pageNumber,
@@ -83,7 +86,7 @@ $(function(){
 			 tname:$("#qusetname").val(),
 			 tstartplace:$("#qrealname").val(),
 			 tendplace:$("#end").val(),
-			 startDate:$("#start").val(),
+//			 startDate:$("#start").val(),
 		}
 		//发送ajax请求
 		$("#table").datagrid("load",data);
@@ -150,7 +153,6 @@ $(function(){
            "tendplace":$("#uutendplace").val(),
            "tcabin":$("#uutcabin").val(),
            "tdate":$("#uutdate").val(),
-           "times":$("#uutimes").val(),
            "tsit":$("#uutsit").val(),
            "tchildren":$("#uutchildren").val(),
            "tbaby":$("#uutbaby").val(),
@@ -181,7 +183,7 @@ $(function(){
 		<label>用户名：</label><input class="easyui-textbox" name="tname" id="qusetname">
 		<label>出发地：</label><input class="easyui-textbox" name="tstartplace" id="qrealname">
 		- <input class="easyui-textbox" name="tendplace" id="end">
-		<label>日期：</label><input class="easyui-datebox" name="createDateStart" id="start">
+		<!-- <label>日期：</label><input class="easyui-datebox" name="createDateStart" id="start"> -->
 	</form>
 	<!-- 点击按键 -->
     <input type="button" value="查询" id="query">
@@ -198,7 +200,6 @@ $(function(){
 				<th field="tendplace"  width="80">目的地</th>
 				<th field="tcabin"  width="80">舱位</th>
 				<th field="tdate"  width="80">日期</th>
-				<th field="times"  width="80">时间</th>
 				<th field="tsit"  width="80">座位</th>
 				<th field="tchildren"  width="80">儿童</th>
 				<th field="tbaby"  width="80">幼儿</th>
@@ -229,10 +230,6 @@ $(function(){
 				<tr>
 					<td><label>日期：</label></td>
 					<td><input class="easyui-datebox" name="tdate"  id="uutdate" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>时间：</label></td>
-					<td><input class="easyui-textbox" name="times"  id="uutimes" required="true"/></td>
 				</tr>
 				<tr>
 					<td><label>座位：</label></td>

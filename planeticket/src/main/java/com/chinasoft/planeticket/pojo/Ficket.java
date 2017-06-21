@@ -24,10 +24,6 @@ public class Ficket {
 	 */
 	private String tdate;
 	/**
-	 * 时间
-	 */
-	private Time times;
-	/**
 	 * 座位
 	 */
 	private String tsit;
@@ -77,12 +73,6 @@ public class Ficket {
 	public void setTdate(String tdate) {
 		this.tdate = tdate;
 	}
-	public Time getTimes() {
-		return times;
-	}
-	public void setTimes(Time time) {
-		this.times = time;
-	}
 	public String getTsit() {
 		return tsit;
 	}
@@ -116,7 +106,7 @@ public class Ficket {
 	@Override
 	public String toString() {
 		return "Ficket [tid=" + tid + ", tstartplace=" + tstartplace + ", tendplace=" + tendplace + ", tcabin=" + tcabin
-				+ ", tdate=" + tdate + ", time=" + times + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby="
+				+ ", tdate=" + tdate + ", time=" + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby="
 				+ tbaby + ", tprice=" + tprice + ", tname=" + tname + "]";
 	}
 	
