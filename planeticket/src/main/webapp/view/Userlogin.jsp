@@ -30,13 +30,11 @@ $(function(){
 			var data={
 					curPage:curPage,
 					pageSize:pageSize,
-					username:$("#qusername").val(),
-					realname:$("#qrealname").val(),
-					startDate:$("#start").val(),
-					endDate:$("#end").val(),
+					
+					uname:$("#qusername").val(),
+					upwd:$("#quserpwd").val(),
 			}
 			//发送ajax请求
-			//$("#table").datagrid("reload",data);
 			$.ajax({
 				url:"<%=basePath%>view/findAll.do",
 				type:"post",
@@ -93,30 +91,38 @@ $(function(){
 			var idArr=new Array();
 			$.each(rows,function(index,row){
 				//将值放入数组里面
-				idArr.push(row.id);
+				idArr.push(row.uid);
 			})
-			
-			$.ajax({
-				url:"<%=basePath%>view/deleteUser.do",
-				type:"post",
-				dataType:"json",
-				data:{
-					ids:idArr.toString()
-				},
-				success:function(data){
-					//var json=eval("("+data+")");
-					alert(data.tip);
-					$("#table").datagrid("reload");
-				}						
-			})
+			$.messager.confirm("提示",'你确定删除用户?',function(r){
+                 if (r){
+                		$.ajax({
+        					url:"<%=basePath%>view/deleteUser.do",
+        					type:"post",
+        					dataType:"json",
+        					data:{
+        						"ids":idArr.toString(),
+        					},
+        					success:function(data){
+        						//var json=eval("("+data+")");
+        						alert(data.tip);
+        						$("#table").datagrid("reload");
+        					}
+        				})
+                      }
+            });
+		
 		}else{
-			alert("请选择要删除的数据");
+			alert("请选择要删除的机票");
 		}
 	})
 //查询用户信息	
 	$("#query").click(function(){
 		var data={
-				username:$("#qusername").val(),
+				 curPage:$("#table").datagrid("getPager").pagination("options").pageNumber,
+				 pageSize:$("#table").datagrid("getPager").pagination("options").pageSize,  
+				 
+				 uname:$("#qusetname").val(),
+				 upwd:$("#qusepwd").val(),
 		}
 		//发送ajax请求
 		$("#table").datagrid("load",data);
@@ -195,6 +201,7 @@ function closeDlg(){
 <body>
 	<form id="queryForm">
 		<label>用户名：</label><input class="easyui-textbox" name="uname" id="qusername">
+		<label>用户密码：</label><input class="easyui-textbox" name="upwd" id="quserpwd">
 	</form>
 	<input type="button" value="查询" id="query">
 	<input type="button" value="修改" id="update">

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.chinasoft.planeticket.mapper.UserMapper;
+import com.chinasoft.planeticket.pojo.Page;
 import com.chinasoft.planeticket.pojo.User;
 import com.chinasoft.planeticket.service.UserService;
 
@@ -21,9 +22,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
+	public boolean deleteUser(int[] ids) {
 		// TODO Auto-generated method stub
-		return userMapper.deleteUser(user);
+		return userMapper.deleteUser(ids);
 	}
 
 	@Override
@@ -39,10 +40,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> queryUser(User user) {
-		return userMapper.queryUser(user);
+	public User queryUser(User user) {
 		// TODO Auto-generated method stub
-		
+		return userMapper.queryUser(user);
 	}
 
 	@Override
@@ -52,9 +52,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User findById(int ids) {
+	public User findById(int id) {
 		// TODO Auto-generated method stub
-		return userMapper.findById(ids);
+		return null;
+	}
+
+	@Override
+	public void queryUsers(Page<User> page) {
+		// TODO Auto-generated method stub
+		List<User> list=userMapper.queryUsers(page);
+		int total=userMapper.queryCount(page);
+		page.setRows(list);
+		page.setTotal(total);	
 	}
 	
 	
