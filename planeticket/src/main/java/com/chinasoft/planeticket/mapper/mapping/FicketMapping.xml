@@ -15,18 +15,5 @@
   			<result column="baby" property="baby"/>
   			<result column="tprice" property="tprice"/>
   			<result column="tname" property="tname"/>
-  		</resultMap>
-  		
-  		<!-- 查询 --> 
-  		<!-- 	<select id="queryFicket" parameterType="ficket" resultMap="ficketResults">
-  				select * from ticket where 
-  				tname=#{tname} 
-  			</select> -->
-  		<!-- 添加 -->
-  		<insert id="insertFicket" parameterType="ficket" useGeneratedKeys="true" keyProperty="uid" >
-  			insert into ticket (tstartplace,tendplace,tcabin,tdate,tsit,tchildren,tbaby,tprice,tname) 
-  			values (#{tstartplace},#{tendplace},#{tcabin},#{tdate},#{tsit},#{tchidren},#{baby},#{tprice},#{tname})
-  		</insert>
-  	
-  			
+  		</resultMap>		
   </mapper>
