@@ -1,6 +1,6 @@
 package com.chinasoft.planeticket.pojo;
 
-import java.sql.Date;
+import java.sql.Time;
 
 public class Ficket {
 	/**
@@ -22,7 +22,7 @@ public class Ficket {
 	/**
 	 * 日期
 	 */
-	private Date tdate;
+	private String tdate;
 	/**
 	 * 座位
 	 */
@@ -30,11 +30,11 @@ public class Ficket {
 	/**
 	 * 儿童
 	 */
-	private String tchidren;
+	private String tchildren;
 	/**
 	 * 婴儿
 	 */
-	private String baby;
+	private String tbaby;
 	/**
 	 * 价格
 	 */
@@ -67,10 +67,10 @@ public class Ficket {
 	public void setTcabin(String tcabin) {
 		this.tcabin = tcabin;
 	}
-	public Date getTdate() {
+	public String getTdate() {
 		return tdate;
 	}
-	public void setTdate(Date tdate) {
+	public void setTdate(String tdate) {
 		this.tdate = tdate;
 	}
 	public String getTsit() {
@@ -79,17 +79,17 @@ public class Ficket {
 	public void setTsit(String tsit) {
 		this.tsit = tsit;
 	}
-	public String getTchidren() {
-		return tchidren;
+	public String getTchildren() {
+		return tchildren;
 	}
-	public void setTchidren(String tchidren) {
-		this.tchidren = tchidren;
+	public void setTchildren(String tchildren) {
+		this.tchildren = tchildren;
 	}
-	public String getBaby() {
-		return baby;
+	public String getTbaby() {
+		return tbaby;
 	}
-	public void setBaby(String baby) {
-		this.baby = baby;
+	public void setTbaby(String tbaby) {
+		this.tbaby = tbaby;
 	}
 	public String getTprice() {
 		return tprice;
@@ -106,10 +106,10 @@ public class Ficket {
 	@Override
 	public String toString() {
 		return "Ficket [tid=" + tid + ", tstartplace=" + tstartplace + ", tendplace=" + tendplace + ", tcabin=" + tcabin
-				+ ", tdate=" + tdate + ", tsit=" + tsit + ", tchidren=" + tchidren + ", baby=" + baby + ", tprice="
-				+ tprice + ", tname=" + tname + "]";
+				+ ", tdate=" + tdate + ", time=" + ", tsit=" + tsit + ", tchildren=" + tchildren + ", tbaby="
+				+ tbaby + ", tprice=" + tprice + ", tname=" + tname + "]";
 	}
-
+	
 	
 	
 }

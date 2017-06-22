@@ -18,7 +18,6 @@
 	<!-- 读取配置jdbc文件 -->
 	<context:property-placeholder location="classpath:mysql-jdbc.properties"/>
 	
-	
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<property name="driverClassName" value="${driver}"/>
