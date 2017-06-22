@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.chinasoft.planeticket.mapper.MoneyMapper">
+ 	<resultMap type="money" id="moneyResult">
+ 		<id column="mid" property="mid"/>
+ 		<result column="mbankid" property="mbankid"/>
+ 		<result column="moneys" property="moneys"/>
+ 		<result column="mlevel" property="mlevel"/>
+ 		<result column="mcashcoupon" property="mcashcoupon"/>
+ 	</resultMap>
+ 	<sql id="condition">
+ 		<where>
+ 			<if test="query!= null and query.mid != null and query.mid!=''">
+ 				and mid=#{query.mid}
+ 			</if>
+ 			<if test="query!= null and query.mbankid != null and query.mbankid!=''">
+ 				and mbankid=#{query.mbankid}
+ 			</if>
+ 		</where>
+ 	</sql>	
+ 	<select id="queryMoney" parameterType="page" resultMap="moneyResult"> 		
+ 		select * from money
+ 		<include refid="condition"/>
+ 		limit #{start},#{pageSize}
+ 	</select>
+ 	<select id="queryCount" parameterType="page" resultType="int">
+ 	    select count(*) from money
+ 	</select> 
+ 	<insert id="addMoney" parameterType="money">
+ 	    insert into money(mbankid,moneys,mlevel,mcashcoupon) values(#{mbankid},#{moneys},#{mlevel},#{mcashcoupon})
+ 	</insert>
+ 	<delete id="deleteMoney">
+ 	    delete from money where mid in
+ 	    <foreach collection="array" open="(" close=")" separator="," item="mid">
+ 			#{mid}
+ 		</foreach>
+ 	</delete>
+ 	<update id="updateMoney" parameterType="money">
+ 		update money set mbankid=#{mbankid},mlevel=#{mlevel}
+ 					 where mid=#{mid}
+ 	</update> 
+ </mapper>
+ 
+ 

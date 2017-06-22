@@ -16,7 +16,8 @@
   			<result column="tbaby" property="tbaby"/>
   			<result column="tprice" property="tprice"/>
   			<result column="tname" property="tname"/>
-  		</resultMap>
+  		</resultMap>		
+
 
   		<!-- 查询 --> 
   		 <select id="queryFicket" parameterType="ficket" resultMap="ficketResults">
