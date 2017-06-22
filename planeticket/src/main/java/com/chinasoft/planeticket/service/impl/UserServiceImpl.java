@@ -13,35 +13,24 @@ import com.chinasoft.planeticket.service.UserService;
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService{
 	@Resource private UserMapper userMapper;
-	
-	
+
 	@Override
-	public int insertUser(User user) {
+	public boolean insertUser(User user) {
 		// TODO Auto-generated method stub
 		return userMapper.insertUser(user);
 	}
 
-
 	@Override
-	public int deleteUser(User user) {
+	public boolean deleteUser(User user) {
 		// TODO Auto-generated method stub
 		return userMapper.deleteUser(user);
 	}
 
-
 	@Override
-	public int updateUser(User user) {
+	public boolean updateUser(User user) {
 		// TODO Auto-generated method stub
 		return userMapper.updateUser(user);
 	}
-
-
-	@Override
-	public User queryUser(User user) {
-		// TODO Auto-generated method stub
-		return userMapper.queryUser(user);
-	}
-
 
 	@Override
 	public List<User> findAll(User user) {
@@ -49,9 +38,24 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findAll(user);
 	}
 
+	@Override
+	public List<User> queryUser(User user) {
+		return userMapper.queryUser(user);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public String total(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public User findById(int ids) {
+		// TODO Auto-generated method stub
+		return userMapper.findById(ids);
+	}
+	
 	
 }

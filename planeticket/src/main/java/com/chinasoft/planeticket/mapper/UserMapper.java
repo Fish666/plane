@@ -6,21 +6,17 @@ import com.chinasoft.planeticket.pojo.User;
 
 public interface UserMapper {
 	
-//	添加用户
-	public int insertUser(User user);
-
-// 	删除用户
-	public int deleteUser(User user);
+	 boolean insertUser(User user);
+		
+	 boolean deleteUser(User user);
 	
-// 	查询用户
-	public User queryUser(User user);
+	 boolean updateUser(User user);
 	
-//  修改用户
-	public int updateUser(User user);
+	List<User> findAll(User user);
 	
-	
+	List<User> queryUser(User user);
 	
 	String total(User user);
 	
-	List<User> findAll(User user);
+	User findById(int ids);
 }

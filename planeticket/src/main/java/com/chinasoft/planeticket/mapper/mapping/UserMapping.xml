@@ -15,12 +15,11 @@
   			<result column="uidnum" property="uidnum"/>
   			<result column="uemail" property="uemail"/>
   			<result column="uphone" property="uphone"/>
-  			<result column="money_mid" property="money_mid"/>
   		</resultMap>
   		
   		<insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="uid">
-  			insert into users(uname,upwd,urealname,usex,uage,ubirthday,uidnum,uemail,uphone,money_mid)values 
-  			(#{uname},#{upwd},#{urealname},#{usex},#{uage},#{ubirthday},#{uidnum},#{uemail},#{uphone},#{money_mid})
+  			insert into users(uname,upwd,urealname,usex,uage,ubirthday,uidnum,uemail,uphone)values 
+  			(#{uname},#{upwd},#{urealname},#{usex},#{uage},#{ubirthday},#{uidnum},#{uemail},#{uphone})
   		</insert>
   		
   		<delete id="deleteUser" parameterType="java.lang.String">
@@ -28,17 +27,42 @@
   		</delete>
   		
   		<select id="findAll" parameterType="user" resultMap="userResults">
-  			select * from users;
+  			select * from users
+  			<where>
+  				<if test="uname !=null and uname!=''">
+  					and	uname like concat('%','${uname}','%') 
+  				</if>
+  			</where>
   		</select>
-  		
+  		 <select id="total" parameterType="user" resultType="java.lang.String">
+  			select count(*) from users 
+  			<where>
+  				<if test="tname !=null and tname!=''">
+  					uname=#{uname}
+  				</if>
+  				<if test="tstartplace !=null and tstartplace !=''">
+  					urealname=#{urealname}
+  				</if>
+  				<if test="tendplace !=null and tendplace !=''">
+  					usex=#{usex}
+  				</if>
+  				<if test="tdate !=null and tdate !=''">
+  					uage=#{uage}
+  				</if>
+  			</where>
+  		</select>
   		<select id="queryUser" parameterType="user" resultMap="userResults">
-  			select * from users where uname=#{uname},upwd=#{upwd},urealname=#{urealname},usex=#{usex},
-  			uage=#{uage},ubirthday=#{ubirthday},udinum=#{uidnum},uemail=#{uemail},uphone=#{uphone},money_id=#{money_id};
+  			select * from users
+  			where uname=#{uname} and upwd=#{upwd} and urealname=#{urealname} and usex=#{usex} and
+  			uage=#{uage} and ubirthday=#{ubirthday} and uidnum=#{uidnum} and uemail=#{uemail} and uphone=#{uphone}
+  		</select> 
+  		<select id="findUser" parameterType="java.lang.String" resultMap="userResults">
+  			select * from users where uname=#{uname};
   		</select>
   		
   		<update id="updateUser" parameterType="user">
   			update users set uname=#{uname},upwd=#{upwd},urealname=#{urealname},usex=#{usex},
-  			uage=#{uage},ubirthday=#{ubirthday},udinum=#{uidnum},uemail=#{uemail},uphone=#{uphone},money_id=#{money_id}
+  			uage=#{uage},ubirthday=#{ubirthday},uidnum=#{uidnum},uemail=#{uemail},uphone=#{uphone}
   			where uid=#{uid};
   		</update>
   	</mapper>
