@@ -24,11 +24,13 @@ public interface FicketMapper {
 	 * @param ficket
 	 * @return
 	 */
-	boolean deleteFicket(String ids);
+	boolean deleteFicket(int[] ids);
 	
 	String total(Ficket ficket);
 	
 	List<Ficket> findAll(Ficket ficket);
+	
 	List<Ficket> queryUsers(Page<Ficket> page);
+	
 	int queryCount(Page<Ficket> page);
 }

@@ -24,13 +24,20 @@ public interface IFicketService {
 	 * @param ids
 	 * @return
 	 */
-	boolean deleteFicket(String ids);
+	boolean deleteUser(int[] ids);
 	
 	Ficket findById(int id);
 	
 	String total(Ficket ficket);
-	
-	void queryUsers(Page<Ficket> page);
 	List<Ficket> findAll(Ficket ficket);
+	/**
+	 * 分页
+	 * @param page
+	 */
+	void queryUsers(Page<Ficket> page);
+	
+	
+	
+	
 	
 }

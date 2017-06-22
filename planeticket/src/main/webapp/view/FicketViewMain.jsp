@@ -35,6 +35,9 @@
 				<div title="机票查询">
 					<a href="javascript:void(0);" onclick="openTbs('购买机票','FicketView.jsp');">购买机票</a><br>
 				</div>
+				<div title="订单查询">
+					<a href="javascript:void(0);" onclick="openTbs('机票订单','FicketView.jsp');">机票订单</a><br>
+				</div>
 			</div>
 		</div>
 		<div region="center" style="height:500px">

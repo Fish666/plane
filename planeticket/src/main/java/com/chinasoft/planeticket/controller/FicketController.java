@@ -72,12 +72,12 @@ public class FicketController {
 	 * @param ficket
 	 * @return
 	 */
-	/*@RequestMapping("/insertFicket")
+/*	@RequestMapping("/insertFicket")
 	@ResponseBody
 	public boolean insertTest(Ficket ficket){
 	boolean add=iFicketService.insertFicket(ficket);
 	      return add;
-	} */    
+	} */   
 	        
 	        
 	@RequestMapping("/insertFicket")
@@ -93,7 +93,7 @@ public class FicketController {
 			insert.put("tip", "添加失败");
 		}
 		return insert;
-	} 
+	}
 	/**
 	 * 删除机票
 	 * @param ids
@@ -101,10 +101,10 @@ public class FicketController {
 	 */
 	@RequestMapping("/deleteFicket")
 	@ResponseBody
-	public JSONObject deleteFicket(String ids){
+	public JSONObject deleteFicket(int[] ids){
 		JSONObject json=new JSONObject();
 		System.out.println(ids);
-		if (iFicketService.deleteFicket(ids)) {
+		if (iFicketService.deleteUser(ids)) {
 			json.put("status", 1);
 			json.put("tip", "删除成功");
 		}else {

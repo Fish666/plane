@@ -43,7 +43,7 @@ public class FicketServiceImpl implements IFicketService{
 	 * 删除
 	 */
 	@Override
-	public boolean deleteFicket(String ids) {
+	public boolean deleteUser(int[] ids) {
 		// TODO Auto-generated method stub
 		return ficketMapper.deleteFicket(ids);
 	}
@@ -66,6 +66,7 @@ public class FicketServiceImpl implements IFicketService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public void queryUsers(Page<Ficket> page) {
 		// TODO Auto-generated method stub
@@ -74,6 +75,7 @@ public class FicketServiceImpl implements IFicketService{
 		page.setRows(list);
 		page.setTotal(total);	
 	}
+	
 	
 
 }
