@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.chinasoft.planeticket.mapper.WorksMapper">
+  		<resultMap id="ficketResults" type="works" >
+  			<id column="wid" property="wid"/>
+  			<result column="wcaptain" property="wcaptain"/>
+  			<result column="wairline" property="wairline"/>
+  			<result column="wplanenum" property="wplanenum"/>
+  			
+  		</resultMap>
+  		<!-- 查询 --> 
+	      <sql id="worksquery">
+			w.wcaptain,w.wairline,w.wplanenum
+		    </sql>
+	 	
+		 	<select id="queryEndplace" resultMap="ficketResults">
+		 		select 	<include refid="worksquery"/>
+		 				
+		 			from flight f
+		 			left join works w on f.fid=w.Flight_fid
+		 			where f.fendplace=#{fendplace}
+		 	</select> 
+		 	
+  		
+  		 	<select id="queryPlanenum"  resultMap="ficketResults">
+  				select 	<include refid="worksquery"/>
+ 				
+ 		     	from flight f
+ 		     	left join works w on f.fid=w.Flight_fid
+ 		    	where f.fplanenum=#{fplanenum}
+  			</select> 	
+  			
+  				
+	  		<select id="queryAll"  resultMap="ficketResults">
+	  			select 	<include refid="worksquery"/>
+	 				
+	 		     	from flight f
+	 		     	left join works w on f.fid=w.Flight_fid
+	  		</select>
+  		
+  </mapper>

@@ -25,6 +25,7 @@
 			
 		}
 	}
+		
 	</script>
 </head>
 <body>
@@ -37,10 +38,14 @@
 			style="width: 150px; height: 500px;">
 			<div class="easyui-accordion" style="width: 150px; height: 500px;">
 				 <div title="航班管理">
-					<a href="javascript:void(0);" onclick="openTbs('航班信息','../view/Plane.jsp')">添加航班</a>
+					<a href="javascript:void(0);" onclick="openTbs('航班信息','../view/Plane.jsp')">添加航班</a><br>
+   			 		<a href="javascript:void(0);" onclick="openTbs('航班信息','${pageContext.request.contextPath}/admins/adminsLogin.do')">查询航班</a>
+   			 		
    			 		</div>
-   			 		 <div title="航班管理">
-					<a href="javascript:void(0);" onclick="openTbs('')">查询航班</a>
+   			 	               	
+   			 		<div title="机组人员管理">
+   			 		  <a href="javascript:void(0);" onclick="openTbs('添加机组人员','../view/Works.jsp')">添加机组人员</a><br>
+   			 		 <a href="javascript:void(0);" onclick="openTbs('机组人员信息','../view/WorksQuery.jsp')">机组人员信息</a>
    			 		</div>
 				</div>
 				</div>

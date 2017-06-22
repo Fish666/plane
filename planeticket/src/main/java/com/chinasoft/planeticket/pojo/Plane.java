@@ -13,6 +13,15 @@ public class Plane {
 	private String fendplace;
 	private String fcompany;
 	private int fsitcount;
+	private Works works;
+	
+	
+	public Works getWorks() {
+		return works;
+	}
+	public void setWorks(Works works) {
+		this.works = works;
+	}
 	public int getFid() {
 		return fid;
 	}
