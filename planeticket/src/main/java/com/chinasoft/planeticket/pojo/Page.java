@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Page<T> {
 	private T query;
-	private int pageSize=10;
-	private int curPage=1;
-	private int start;
+	private Integer pageSize=10;
+	private Integer curPage=1;
+	private Integer start;
 	
 	private int total;
 	private List<T> rows;
 	
-	public int getPageSize() {
+	public Integer getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(int pageSize) {
+	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
 
@@ -27,15 +27,16 @@ public class Page<T> {
 		this.total = total;
 	}
 
-	public int getCurPage() {
+	public Integer getCurPage() {
 		return curPage;
 	}
 
-	public void setCurPage(int curPage) {
+	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;
 	}
 
 	public int getStart() {
+		start=(curPage-1)*pageSize;
 		return start;
 	}
 

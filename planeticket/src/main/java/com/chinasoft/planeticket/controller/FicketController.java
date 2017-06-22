@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 
 
 @Controller
-@RequestMapping("/view")
+@RequestMapping("/ficket")
 public class FicketController {
 	@Resource
 	private IFicketService iFicketService;

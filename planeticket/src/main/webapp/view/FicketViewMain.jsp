@@ -33,10 +33,10 @@
 		<div region="west" split="true" title="导航菜单" style="width:150px;height:500px">
 			<div class="easyui-accordion" style="width:150px;height:500px">
 				<div title="机票查询">
-					<a href="javascript:void(0);" onclick="openTbs('购买机票','FicketView.jsp');">购买机票</a><br>
+					<a href="javascript:void(0);" onclick="openTbs('购买机票','${pageContext.request.contextPath}/view/FicketView.jsp');">购买机票</a><br>
 				</div>
-				<div title="订单查询">
-					<a href="javascript:void(0);" onclick="openTbs('机票订单','FicketView.jsp');">机票订单</a><br>
+				<div title="机票订单">
+					<a href="javascript:void(0);" onclick="openTbs('机票订单','${pageContext.request.contextPath}/view/Order.jsp');">机票订单</a><br>
 				</div>
 			</div>
 		</div>

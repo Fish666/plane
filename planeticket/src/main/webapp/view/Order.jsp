@@ -4,10 +4,11 @@
 <% String path=request.getContextPath();
    String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>购买机票</title>
+<title>Insert title here</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>jquery-easyui-1.5.2/plugins/jquery.validatebox.js"></script>
@@ -38,7 +39,7 @@ $(function(){
 			//发送ajax请求
 			//$("#table").datagrid("reload",data);
 			$.ajax({
-				url:"<%=basePath%>ficket/getAllFikets.do",
+				url:"<%=basePath%>order/getAllOrder.do",
 				type:"post",
 				dataType:"json",
 				data:data,
@@ -59,7 +60,7 @@ $(function(){
 			readonly:false
 		});
 		$("#updateDlg").dialog("open").dialog("setTitle","修改机票信息");
-		$("#saveUrl").val("<%=basePath%>ficket/updateFicket.do");
+		$("#saveUrl").val("<%=basePath%>order/updateOrderPojo.do");
 		
 		//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
 		   $("#updateForm").form("load",row);
@@ -69,7 +70,7 @@ $(function(){
 	  $("#add").click(function(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("open").dialog("setTitle","添加机票");
-		$("#saveUrl").val("<%=basePath%>ficket/insertFicket.do");
+		$("#saveUrl").val("<%=basePath%>order/insertOrderPojo.do");
 		$("#uutname").textbox({
 			readonly:false,
 		});
@@ -104,7 +105,7 @@ $(function(){
 			$.messager.confirm("提示",'你确定删除机票?',function(r){
                  if (r){
                 		$.ajax({
-        					url:"<%=basePath%>ficket/deleteFicket.do",
+        					url:"<%=basePath%>order/deleteOrderPojo.do",
         					type:"post",
         					dataType:"json",
         					data:{
@@ -149,15 +150,11 @@ $(function(){
        type:"post",
        url:$("#saveUrl").val(),
        data:{
-    	   "tstartplace":$("#uutstartplace").val(),
-           "tendplace":$("#uutendplace").val(),
-           "tcabin":$("#uutcabin").val(),
-           "tdate":$("#uutdate").val(),
-           "tsit":$("#uutsit").val(),
-           "tchildren":$("#uutchildren").val(),
-           "tbaby":$("#uutbaby").val(),
-           "tprice":$("#uutprice").val(),
-           "tname":$("#uutname").val(),
+    	   "oname":$("#uoname").val(),
+           "ostatus":$("#uostatus").val(),
+           "onumber":$("#uonumber").val(),
+           "oDate":$("#uoDate").val(),
+           
 	},
        success:function(data){
     	
@@ -174,79 +171,50 @@ $(function(){
 </script>
 </head>
 <body>
-
-	<!-- 搜索框 -->
 	<form id="queryForm">
-		<label>用户名：</label><input class="easyui-textbox" name="tname" id="qusetname">
-		<label>出发地：</label><input class="easyui-textbox" name="tstartplace" id="qrealname">
-		- <input class="easyui-textbox" name="tendplace" id="end">
-		<!-- <label>日期：</label><input class="easyui-datebox" name="createDateStart" id="start"> -->
+		<label>订单名：</label><input class="easyui-textbox" name="oname"id="qoname"> 
+		<label>订单号：</label><input class="easyui-textbox" name="onumber" id="qonumber"> 
+		<label>创建时间：</label><input class="easyui-datebox" name="startDate" id="qoDate">
 	</form>
-	<!-- 点击按键 -->
-    <input type="button" value="查询" id="query">
+	<input type="button" value="查询" id="query">
 	<input type="button" value="修改" id="update">
 	<input type="button" value="增加" id="add">
 	<input type="button" value="删除" id="delete">
-	<!-- 显示数据库 -->
-	<table id="table" class="easyui-datagrid"  url="${pageContext.request.contextPath}/ficket/getAllFikets.do" pagination="true"  method="post">
+	<table id="table" class="easyui-datagrid" url="${pageContext.request.contextPath}/order/getAllOrder.do" pagination="true" method="post">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true"></th>
-				<th field="tid" width="80" >机票Id</th>
-				<th field="tstartplace"  width="80">出发地</th>
-				<th field="tendplace"  width="80">目的地</th>
-				<th field="tcabin"  width="80">舱位</th>
-				<th field="tdate"  width="80">日期</th>
-				<th field="tsit"  width="80">座位</th>
-				<th field="tchildren"  width="80">儿童</th>
-				<th field="tbaby"  width="80">幼儿</th>
-				<th field="tprice"  width="80">价钱</th>
-				<th field="tname"  width="80">姓名</th>
+				<th field="oid" width="80">订单Id</th>
+				<th field="oname" width="80">订单名</th>
+				<th field="ostatus" width="80">订单类型</th>
+				<th field="onumber" width="80">订单号</th>
+				<th field="oDate">创建时间</th>
 			</tr>
 		</thead>
 	</table>
-	<!-- 修改和添加弹框 -->
+	
+		<!-- 修改和添加弹框 -->
 	<div id="updateDlg" class="easyui-dialog" style="width:400px;height:400px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
 			<input type="hidden" name="tid" id="uid">
 			<table align="center">
 				<tr>
-					<td><label>出发地：</label></td>
-					<td><input class="easyui-textbox" name="tstartplace" id="uutstartplace"  required="true"/></td>
+					<td><label>订单名：</label></td>
+					<td><input class="easyui-textbox" name="oname" id="uoname"  required="true"/></td>
 				</tr>
 				<tr>
-					<td><label>目的地：</label></td>
-					<td><input class="easyui-textbox" name="tendplace" id="uutendplace"  required="true"/></td>
+					<td><label>订单类型：</label></td>
+					<td><input class="easyui-textbox" name="ostatus" id="uostatus"  required="true"/></td>
 				</tr>
 				
 				<tr>
-					<td><label>舱位：</label></td>
-					<td><input class="easyui-textbox" name="tcabin"  id="uutcabin" required="true"/></td>
+					<td><label>订单号：</label></td>
+					<td><input class="easyui-textbox" name="ostatus"  id="uostatus" required="true"/></td>
 				</tr>
 				<tr>
-					<td><label>日期：</label></td>
-					<td><input class="easyui-datebox" name="tdate"  id="uutdate" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>座位：</label></td>
-					<td><input class="easyui-textbox" name="tsit"  id="uutsit" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>儿童：</label></td>
-					<td><input class="easyui-textbox" name="tchildren"  id="uutchildren" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>幼儿：</label></td>
-					<td><input class="easyui-textbox" name="tbaby"  id="uutbaby" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>价钱：</label></td>
-					<td><input class="easyui-textbox" name="tprice"  id="uutprice" required="true"/></td>
-				</tr>
-				<tr>
-					<td><label>姓名：</label></td>
-					<td><input class="easyui-textbox" name="tname"  id="uutname" required="true"/></td>
+					<td><label>创建时间：</label></td>
+					<td><input class="easyui-datebox" name="oDate"  id="uoDate" required="true"/></td>
 				</tr>
 			</table>
 			<!-- 显示分页 -->
