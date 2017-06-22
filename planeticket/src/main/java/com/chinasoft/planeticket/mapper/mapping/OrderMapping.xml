@@ -14,7 +14,7 @@
   	</resultMap>
  	<select id="queryOrder" parameterType="orderPojo" resultMap="orders">
  		select * from order
- 		where oname=#{oname} and onumber=#{onumber} and ostatus=#{ostatus}
+ 		where oname=#{oname} and onumber=#{onumber} and ostatus=#{ostatus} and 
  	</select>
  
   	

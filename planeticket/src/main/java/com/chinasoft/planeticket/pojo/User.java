@@ -13,14 +13,7 @@ public class User {
 	private String uidnum;
 	private String uemail;
 	private String uphone;
-	private String money_mid;
 	
-	public String getMoney_mid() {
-		return money_mid;
-	}
-	public void setMoney_mid(String money_mid) {
-		this.money_mid = money_mid;
-	}
 	public String getUphone() {
 		return uphone;
 	}
@@ -85,7 +78,7 @@ public class User {
 	public String toString() {
 		return "User [uid=" + uid + ", uname=" + uname + ", upwd=" + upwd + ", urealname=" + urealname + ", usex="
 				+ usex + ", uage=" + uage + ", ubirthday=" + ubirthday + ", uidnum=" + uidnum + ", uemail=" + uemail
-				+ ", uphone=" + uphone + ", money_mid=" + money_mid + "]";
+				+ ", uphone=" + uphone + ", money_mid=" + "]";
 	}
 	
 	

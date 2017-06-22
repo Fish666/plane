@@ -30,15 +30,13 @@ $(function(){
 			var data={
 					curPage:curPage,
 					pageSize:pageSize,
-					username:$("#qusername").val(),
-					realname:$("#qrealname").val(),
-					startDate:$("#start").val(),
-					endDate:$("#end").val(),
+					
+					uname:$("#qusername").val(),
+					upwd:$("#quserpwd").val(),
 			}
 			//发送ajax请求
-			//$("#table").datagrid("reload",data);
 			$.ajax({
-				url:"<%=basePath%>userServlet?cmd=queryUsers",
+				url:"<%=basePath%>view/findAll.do",
 				type:"post",
 				dataType:"json",
 				data:data,
@@ -59,7 +57,7 @@ $(function(){
 			readonly:true
 		});
 		$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
-		$("#saveUrl").val("<%=basePath%>user/updateUser.do");
+		$("#saveUrl").val("<%=basePath%>view/updateUser.do");
 		
 		//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
 		$("#updateForm").form("load",row);
@@ -69,7 +67,7 @@ $(function(){
 	$("#insert").click(function(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("open").dialog("setTitle","增加用户信息");
-		$("#saveUrl").val("user/insertUser.do");
+		$("#saveUrl").val("<%=basePath%>view/insertUser.do");
 		
 		//发送ajax请求添加
 		$.ajax({
@@ -93,30 +91,38 @@ $(function(){
 			var idArr=new Array();
 			$.each(rows,function(index,row){
 				//将值放入数组里面
-				idArr.push(row.id);
+				idArr.push(row.uid);
 			})
-			
-			$.ajax({
-				url:"<%=basePath%>user/deleteUser.do",
-				type:"post",
-				dataType:"json",
-				data:{
-					ids:idArr.toString()
-				},
-				success:function(data){
-					//var json=eval("("+data+")");
-					alert(data.tip);
-					$("#table").datagrid("reload");
-				}						
-			})
+			$.messager.confirm("提示",'你确定删除用户?',function(r){
+                 if (r){
+                		$.ajax({
+        					url:"<%=basePath%>view/deleteUser.do",
+        					type:"post",
+        					dataType:"json",
+        					data:{
+        						"ids":idArr.toString(),
+        					},
+        					success:function(data){
+        						//var json=eval("("+data+")");
+        						alert(data.tip);
+        						$("#table").datagrid("reload");
+        					}
+        				})
+                      }
+            });
+		
 		}else{
-			alert("请选择要删除的数据");
+			alert("请选择要删除的机票");
 		}
 	})
 //查询用户信息	
 	$("#query").click(function(){
 		var data={
-				username:$("#qusername").val(),
+				 curPage:$("#table").datagrid("getPager").pagination("options").pageNumber,
+				 pageSize:$("#table").datagrid("getPager").pagination("options").pageSize,  
+				 
+				 uname:$("#qusetname").val(),
+				 upwd:$("#qusepwd").val(),
 		}
 		//发送ajax请求
 		$("#table").datagrid("load",data);
@@ -142,6 +148,50 @@ function update(){
 			});
 	
 }
+
+//添加修改的保存按钮
+function update(){
+//如果Id不为空进入修改操作 
+if($("#uid").val()!=""){
+$("#updateForm").form("submit",
+		{
+			url:$("#saveUrl").val(),
+			onSubmit:function(){
+	          	return $(this).form('validate');
+	        },
+			success:function(data){
+			   var json=eval("("+data+")");
+				/*  alert(json.tip); */ 
+				$("#updateDlg").dialog("close");
+				$("#table").datagrid("reload");
+			}
+	
+		});
+}
+
+//如果ID为空进入添加操作
+$.ajax({
+   type:"post",
+   url:$("#saveUrl").val(),
+   data:{
+	   "uname":$("#uuname").val(),
+       "upwd":$("#uupwd").val(),
+       "urealname":$("#Uurealname").val(),
+       "usex":$("#uUsex").val(),
+       "uage":$("#uUage").val(),
+       "ubirthday":$("#Uubirthday").val(),
+       "uidnum":$("#uUidnum").val(),
+       "uemail":$("#uuemail").val(),
+       "uphone":$("#uuphone").val(),
+},
+   success:function(data){
+	
+	  alert(data.tip);
+	$("#updateDlg").dialog("close"); 
+     $('#table').datagrid('reload');
+   }
+}) 
+}
 function closeDlg(){
 	$("#updateForm").form("clear");
 	$("#updateDlg").dialog("close");
@@ -151,26 +201,26 @@ function closeDlg(){
 <body>
 	<form id="queryForm">
 		<label>用户名：</label><input class="easyui-textbox" name="uname" id="qusername">
+		<label>用户密码：</label><input class="easyui-textbox" name="upwd" id="quserpwd">
 	</form>
 	<input type="button" value="查询" id="query">
 	<input type="button" value="修改" id="update">
 	<input type="button" value="增加" id="insert">
 	<input type="button" value="删除" id="delete">
-	<table id="table" class="easyui-datagrid"  url="user/queryUser.do" pagination="true"  method="post">
+	<table id="table" class="easyui-datagrid"  url="${pageContext.request.contextPath}/view/findAll.do" pagination="true"  method="post">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true"></th>
-				<th field="uid" width="80" >用户id</th>
-				<th field="uname"  width="80">用户名</th>
-				<th field="upwd"  width="80">用户密码</th>
-				<th field="urealname"  width="80">真实姓名</th>
-				<th field="usex"  width="80">性别</th>
-				<th field="uage"  width="80">年龄</th>
-				<th field="ubirthday"  width="80">生日</th>
-				<th field="uidnum"  width="80">身份证号</th>
-				<th field="uemail"  width="80">邮箱</th>
-				<th field="uphone"  width="80">电话</th>
-				<th field="money_mid"  width="80">钱包</th>
+				<th field="uid" width="100" >用户id</th>
+				<th field="uname"  width="100">用户名</th>
+				<th field="upwd"  width="100">用户密码</th>
+				<th field="urealname"  width="100">真实姓名</th>
+				<th field="usex"  width="100">性别</th>
+				<th field="uage"  width="100">年龄</th>
+				<th field="ubirthday"  width="100">生日</th>
+				<th field="uidnum"  width="100">身份证号</th>
+				<th field="uemail"  width="100">邮箱</th>
+				<th field="uphone"  width="100">电话</th>
 				<!-- <th field="createDate" data-options="formatter:function(createDate){
 					return new Date(createDate).toLocaleString();
 					}" width="150">添加时间</th> -->
@@ -227,10 +277,6 @@ function closeDlg(){
 					<td><input class="easyui-textbox" name="uphone" id="uuphone"  required="true"/></td>
 				</tr>
 				
-				<tr>
-					<td><label>钱包：</label></td>
-					<td><input class="easyui-textbox" name="money_id" id="umoney_id"  required="true"/></td>
-				</tr>
 				
 				
 			</table>

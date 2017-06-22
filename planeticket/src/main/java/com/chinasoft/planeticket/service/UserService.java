@@ -2,21 +2,23 @@ package com.chinasoft.planeticket.service;
 
 import java.util.List;
 
+import com.chinasoft.planeticket.pojo.Page;
 import com.chinasoft.planeticket.pojo.User;
 
 public interface UserService {
-	public int insertUser(User user);
+	 boolean insertUser(User user);
 	
-	public int deleteUser(User user);
+	 boolean deleteUser(int[] ids);
 	
-	public int updateUser(User user);
+	 boolean updateUser(User user);
 	
-	public List<User> findAll(User user);
+	List<User> findAll(User user);
 	
-	public User queryUser(User user);
+	User queryUser(User user);
 	
-	static String total(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	String total(User user);
+	
+	User findById(int id);
+	
+	void queryUsers(Page<User> page);
 }
