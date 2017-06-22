@@ -3,6 +3,7 @@ package com.chinasoft.planeticket.service;
 import java.util.List;
 
 import com.chinasoft.planeticket.pojo.Ficket;
+import com.chinasoft.planeticket.pojo.Page;
 
 public interface IFicketService {
 	Ficket queryFicket(Ficket ficket);
@@ -23,10 +24,20 @@ public interface IFicketService {
 	 * @param ids
 	 * @return
 	 */
-	boolean deleteFicket(String ids);
+	boolean deleteUser(int[] ids);
 	
 	Ficket findById(int id);
+	
 	String total(Ficket ficket);
 	List<Ficket> findAll(Ficket ficket);
+	/**
+	 * 分页
+	 * @param page
+	 */
+	void queryUsers(Page<Ficket> page);
+	
+	
+	
+	
 	
 }

@@ -27,16 +27,18 @@ $(function(){
 		displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',  
 		onSelectPage:function(curPage,pageSize){
 			var data={
-				/* 	curPage:curPage,
-					pageSize:pageSize, */
-					"uType":$("#quserType").val(),
-				
-				
+				 	curPage:curPage,
+					pageSize:pageSize, 
+					 tname:$("#qusetname").val(),
+					 tstartplace:$("#qusetstartplace").val(),
+					 tendplace:$("#end").val(),
+//					 startDate:$("#start").val(),
+					 
 			}
 			//发送ajax请求
 			//$("#table").datagrid("reload",data);
 			$.ajax({
-				url:"<%=basePath%>ficket/getAllFikets.do",
+				url:"<%=basePath%>view/getAllFikets.do",
 				type:"post",
 				dataType:"json",
 				data:data,
@@ -49,40 +51,42 @@ $(function(){
 		}
 	});
 	
-   //修改
+   //修改机票
    $("#update").click(function(){
 		//获取选中行，如果选中了多行，则获取的是第一个选中行
 		var row=$("#table").datagrid("getSelected");
-		$("#uutstartplace").textbox({
-			readonly:true
+		$("#uutname").textbox({
+			readonly:false
 		});
 		$("#updateDlg").dialog("open").dialog("setTitle","修改机票信息");
 		$("#saveUrl").val("<%=basePath%>view/updateFicket.do");
 		
 		//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
 		   $("#updateForm").form("load",row);
-	})
 	
+   });
 		// 添加机票 
 	  $("#add").click(function(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("open").dialog("setTitle","添加机票");
 		$("#saveUrl").val("<%=basePath%>view/insertFicket.do");
-		$("#uutstartplace").textbox({
+		$("#uutname").textbox({
 			readonly:false,
 		});
 		$("#uusers_uId").textbox({
 			required:false
 		})
-		
 	});
+		
    $("#query").click(function(){
 		var data={
-			/* curPage:$("#table").datagrid("getPager").pagination("options").pageNumber,
-			   pageSize:$("#table").datagrid("getPager").pagination("options").pageSize, */
-				tname:$("#qusetname").val(),
-				tstartplace:$("#qusetstartplace").val(),
-				tdate:$("#start").val()
+			 curPage:$("#table").datagrid("getPager").pagination("options").pageNumber,
+			 pageSize:$("#table").datagrid("getPager").pagination("options").pageSize,  
+			 
+			 tname:$("#qusetname").val(),
+			 tstartplace:$("#qrealname").val(),
+			 tendplace:$("#end").val(),
+//			 startDate:$("#start").val(),
 		}
 		//发送ajax请求
 		$("#table").datagrid("load",data);
@@ -120,9 +124,9 @@ $(function(){
 		}
 	})
 })
-//添加修改的保存按钮
+ //添加修改的保存按钮
 	function update(){
-//如果Id不为空进入修改操作
+//如果Id不为空进入修改操作 
    if($("#uid").val()!=""){
 	$("#updateForm").form("submit",
 			{
@@ -131,14 +135,15 @@ $(function(){
 		          	return $(this).form('validate');
 		        },
 				success:function(data){
-					/* var json=eval("("+data+")"); */
-					alert(json.tip);
+				   var json=eval("("+data+")");
+					/*  alert(json.tip); */ 
 					$("#updateDlg").dialog("close");
 					$("#table").datagrid("reload");
 				}
 		
 			});
    }
+   
 //如果ID为空进入添加操作
    $.ajax({
        type:"post",
@@ -150,7 +155,7 @@ $(function(){
            "tdate":$("#uutdate").val(),
            "tsit":$("#uutsit").val(),
            "tchildren":$("#uutchildren").val(),
-           "tbaby":$("#uubaby").val(),
+           "tbaby":$("#uutbaby").val(),
            "tprice":$("#uutprice").val(),
            "tname":$("#uutname").val(),
 	},
@@ -160,8 +165,8 @@ $(function(){
 		$("#updateDlg").dialog("close"); 
          $('#table').datagrid('reload');
        }
-    })  
-}
+    }) 
+} 
 	function closeDlg(){
 	$("#updateForm").form("clear");
 	$("#updateDlg").dialog("close");
@@ -169,54 +174,28 @@ $(function(){
 </script>
 </head>
 <body>
-<h2>Basic Layout</h2>
-	<p>The layout contains north,south,west,east and center regions.</p>
-	<div style="margin:20px 0;"></div>
-	<div class="easyui-layout" style="width:700px;height:350px;">
-		<div data-options="region:'north'" style="height:50px"></div>
-		<div data-options="region:'south',split:true" style="height:50px;"></div>
-		<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
-		<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
-		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-			<table class="easyui-datagrid"
-					data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
-				<thead>
-					<tr>
-						<th data-options="field:'itemid'" width="80">Item ID</th>
-						<th data-options="field:'productid'" width="100">Product ID</th>
-						<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
-						<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
-						<th data-options="field:'attr1'" width="150">Attribute</th>
-						<th data-options="field:'status',align:'center'" width="60">Status</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
-	<form action="${pageContext.request.contextPath}/ficket/insertFicket.do">
-		出发地：<input name="tstartplace"><br>
-		目的地：<input name="tendplace"><br>
-		舱位：<input name="tcabin"><br>
-		日期：<input name="tdate"><br>
-		座位：<input name="tsit"><br>
-		儿童：<input name="tchidren"><br>
-		幼儿：<input name="baby"><br>
-		姓名：<input name="tname"><br>
-		价钱：<input name="tprice"><br>
-		<button>提交</button>
+
+	<!-- 搜索框 -->
+
+
+
 	<form id="queryForm">
-		<label>用户名：</label><input class="easyui-textbox" name="usernmae" id="qusetname">
-		<label>出发地：</label><input class="easyui-textbox" name="realname" id="qusetstartplace">
-		<label>日期：</label><input class="easyui-datebox" name="createDateStart" id="start">
+		<label>用户名：</label><input class="easyui-textbox" name="tname" id="qusetname">
+		<label>出发地：</label><input class="easyui-textbox" name="tstartplace" id="qrealname">
+		- <input class="easyui-textbox" name="tendplace" id="end">
+		<!-- <label>日期：</label><input class="easyui-datebox" name="createDateStart" id="start"> -->
 	</form>
+	<!-- 点击按键 -->
     <input type="button" value="查询" id="query">
 	<input type="button" value="修改" id="update">
 	<input type="button" value="增加" id="add">
 	<input type="button" value="删除" id="delete">
+	<!-- 显示数据库 -->
 	<table id="table" class="easyui-datagrid"  url="${pageContext.request.contextPath}/view/getAllFikets.do" pagination="true"  method="post">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true"></th>
+				<th field="tid" width="80" >机票Id</th>
 				<th field="tstartplace"  width="80">出发地</th>
 				<th field="tendplace"  width="80">目的地</th>
 				<th field="tcabin"  width="80">舱位</th>
@@ -229,10 +208,11 @@ $(function(){
 			</tr>
 		</thead>
 	</table>
-	<div id="updateDlg" class="easyui-dialog" style="width:400px;height:340px" closed="true">
+	<!-- 修改和添加弹框 -->
+	<div id="updateDlg" class="easyui-dialog" style="width:400px;height:400px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
-			<input type="hidden" name="id" id="uid">
+			<input type="hidden" name="tid" id="uid">
 			<table align="center">
 				<tr>
 					<td><label>出发地：</label></td>
@@ -272,6 +252,7 @@ $(function(){
 					<td><input class="easyui-textbox" name="tname"  id="uutname" required="true"/></td>
 				</tr>
 			</table>
+			<!-- 显示分页 -->
 					<div id="update-dlg-btns" align="center">
 					<a href="javascript:void(0);" class="easyui-linkbutton" 
 					iconCls="icon-ok" onclick="update();" style="width:100px;height:30px" >保存</a>

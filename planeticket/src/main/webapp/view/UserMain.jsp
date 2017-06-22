@@ -5,11 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/jquery-easyui-1.5.2/themes/default/easyui.css">
 <script type="text/javascript">
-	 function openTbs(title,url){
+	function openTbs(title,url){
 		if($("#tabs").tabs("exists",title)){
 			$("#tabs").tabs("select",title);
 		}else{
@@ -22,26 +19,29 @@
 			});
 			
 		}
-	} 
+	}
+
 </script>
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/jquery-easyui-1.5.2/themes/default/easyui.css">
 <body>
- <div class="easyui-layout" style="width:100%;height:768px">
+	<div class="easyui-layout" style="width:100%;height:768px">
 		<div region="north" split="true" style="height: 100px;width: 100%">
 			北航
 		</div>
 		<div region="west" split="true" title="导航菜单" style="width:150px;height:500px">
 			<div class="easyui-accordion" style="width:150px;height:500px">
-				<div title="机票查询">
-					<a href="javascript:void(0);" onclick="openTbs('购买机票','FicketView.jsp');">购买机票</a><br>
-				</div>
-				<div title="订单查询">
-					<a href="javascript:void(0);" onclick="openTbs('机票订单','FicketView.jsp');">机票订单</a><br>
+				<div title="用户管理">
+					<a href="javascript:void(0);" onclick="openTbs('员工管理','Userlogin.jsp');">用户信息</a><br>
+					<a>用户管理</a>
 				</div>
 			</div>
 		</div>
 		<div region="center" style="height:500px">
 			<div class="easyui-tabs" id="tabs" style="height:100%">
+			
 			</div>
 		</div>
 	</div>
